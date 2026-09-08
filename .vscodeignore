@@ -1,0 +1,8 @@
+.git/**
+.vscode/**
+src/**
+node_modules/**
+vite.config.ts
+tsconfig.json
+index.html
+*.vsix

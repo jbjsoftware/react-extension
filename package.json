@@ -1,0 +1,94 @@
+{
+  "name": "atelier-code",
+  "displayName": "Atelier Code",
+  "description": "A focused AI coding companion for VS Code.",
+  "version": "0.1.0",
+  "type": "module",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:atelier.chatView"
+  ],
+  "main": "./dist/extension.cjs",
+  "contributes": {
+    "commands": [
+      {
+        "command": "atelier.newChat",
+        "title": "Atelier: New Chat",
+        "icon": "$(add)"
+      },
+      {
+        "command": "atelier.openChat",
+        "title": "Atelier: Open Chat"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "atelier",
+          "title": "Atelier",
+          "icon": "media/spark.svg"
+        }
+      ]
+    },
+    "views": {
+      "atelier": [
+        {
+          "type": "webview",
+          "id": "atelier.chatView",
+          "name": "Atelier"
+        }
+      ]
+    },
+    "menus": {
+      "view/title": [
+        {
+          "command": "atelier.newChat",
+          "when": "view == atelier.chatView",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "npm run build:webview && npm run build:extension",
+    "build:webview": "vite build",
+    "build:extension": "esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=dist/extension.cjs",
+    "watch": "concurrently \"vite build --watch\" \"esbuild src/extension.ts --bundle --platform=node --format=cjs --external:vscode --outfile=dist/extension.cjs --watch\"",
+    "check": "tsc --noEmit",
+    "package": "vsce package"
+  },
+  "dependencies": {
+    "@ai-sdk/react": "latest",
+    "@radix-ui/react-collapsible": "latest",
+    "@radix-ui/react-dropdown-menu": "latest",
+    "@radix-ui/react-tooltip": "latest",
+    "@shadcn/helpers": "latest",
+    "ai": "latest",
+    "class-variance-authority": "latest",
+    "clsx": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "tailwind-merge": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "@types/vscode": "^1.95.0",
+    "@vitejs/plugin-react": "latest",
+    "@vscode/vsce": "latest",
+    "concurrently": "latest",
+    "esbuild": "latest",
+    "tailwindcss": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  }
+}
