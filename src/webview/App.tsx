@@ -18,7 +18,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "./components/ui/button";
-import { Tooltip } from "./components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "./components/ui/tooltip";
 import { ChatMessage, mockResponse, starters, ToolStep } from "./mock";
 
 declare const acquireVsCodeApi:
@@ -135,10 +135,13 @@ export default function App() {
           <span>Ateliers</span>
         </div>
         <div className="header-actions">
-          <Tooltip label="New chat">
-            <Button variant="ghost" size="icon" onClick={() => setMessages([])}>
+          <Tooltip>
+            <TooltipTrigger
+              render={<Button variant="ghost" size="icon" onClick={() => setMessages([])} />}
+            >
               <Plus size={16} />
-            </Button>
+            </TooltipTrigger>
+            <TooltipContent>New chat</TooltipContent>
           </Tooltip>
           <Button variant="ghost" size="icon">
             <Menu size={16} />
@@ -202,10 +205,11 @@ export default function App() {
           />
           <div className="composer-bar">
             <div className="composer-tools">
-              <Tooltip label="Add context">
-                <Button type="button" variant="ghost" size="icon">
+              <Tooltip>
+                <TooltipTrigger render={<Button type="button" variant="ghost" size="icon" />}>
                   <Paperclip size={16} />
-                </Button>
+                </TooltipTrigger>
+                <TooltipContent>Add context</TooltipContent>
               </Tooltip>
               <button type="button" className="context-pill">
                 <span>@</span> Add context
